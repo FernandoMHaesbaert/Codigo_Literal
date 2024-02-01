@@ -1,0 +1,65 @@
+---
+title: "Códigos como expressão literal"
+subtitle: "Útil para preparar tutoriais com códigos reproduzíveis"
+author: "Fernando M. Haesbaert"
+date: "2024-02-01"
+output: html_document
+---
+
+# Mostrar um código in-line como expressão literal
+Uma maneira de mostrar um código in-line como expressão literal é quebrar a expressão embutida depois `r`, por exemplo:
+````{verbatim}
+Texto e código literal `` `r
+1+1` ``
+````
+
+Irá gerar o output:  
+
+
+Texto e código literal `` `r
+1+1` ``.
+
+
+
+Outra maneira de mostrar uma expressão R in-line literal é agrupar o código R em `knitr::inline_expr()`, por exemplo:  
+
+````{verbatim}
+`` `r knitr::inline_expr("2+2")` `` 
+````
+
+
+Isso irá gerar:  
+`` `r knitr::inline_expr("2+2")` ``
+
+
+# Mostrar pedaços de códigos em blocos como expressão literal 
+Quando precisamos escrever um tutorial, pode ser necessário gerar um trecho de código literal ou uma expressão embutida que não seja analisada por knitr, e queremos exibir o conteúdo do cabeçalho do trecho.  
+
+O mecanismo `verbatim` pode pegar qualquer conteúdo do R Markdown e exibi-lo como está no documento resultante. Ao usar mais crases nas cercas externas do que crases no conteúdo interno, um pedaço de código inteiro, incluindo o cabeçalho do pedaço, pode ser incluído, por exemplo:
+
+`````{verbatim}
+````{verbatim}
+```{r, eval=TRUE}
+1 + 1
+```
+````
+`````
+
+
+Produzirá:
+````{verbatim}
+```{r, eval=TRUE}
+1 + 1
+```
+````
+
+
+Você tem que usar pelo menos N+1crases para encerrar Nos crases. Utilizei quatro crases aqui para o `verbatim` porque o cabeçalho do pedaço interno contém três crases.  
+
+O conteúdo do `verbatim` será colocado em um bloco de código protegido com a classe default, o que significa que nenhum realce de sintaxe será aplicado.  
+
+
+# Referências
+[R Markdown Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/verbatim-code-chunks.html)
+
+
